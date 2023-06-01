@@ -5,7 +5,6 @@ OUT_DIR=$CKPT/testing
 LOAD_CKPT_FILE=None
 PATCHING_RATIO=1.0
 
-# MODEL.TEMPORAL_MODELING_TYPE 'expand_temporal_view' \
 cd $ROOT
 python -W ignore -u tools/run_net.py \
     --cfg configs/Kinetics/CLIP_vitb16_8x16_STAdapter.yaml \
