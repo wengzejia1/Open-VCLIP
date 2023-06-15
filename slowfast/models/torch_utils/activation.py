@@ -903,7 +903,7 @@ class MultiheadAttention(Module):
     bias_v: Optional[torch.Tensor]
 
     def __init__(self, embed_dim, num_heads, dropout=0., bias=True, add_bias_kv=False, add_zero_attn=False,
-                 kdim=None, vdim=None, batch_first=False, device=None, dtype=None, temporal_shift=False) -> None:
+                 kdim=None, vdim=None, batch_first=False, device=None, dtype=None, temporal_shift=False, T=8) -> None:
         factory_kwargs = {'device': device, 'dtype': dtype}
         super(MultiheadAttention, self).__init__()
         self.embed_dim = embed_dim
@@ -942,6 +942,7 @@ class MultiheadAttention(Module):
 
         self.add_zero_attn = add_zero_attn
         self.temporal_shift = temporal_shift
+        self.T = T
         self._reset_parameters()
 
     def _reset_parameters(self):
@@ -1034,7 +1035,7 @@ class MultiheadAttention(Module):
                 attn_mask=attn_mask, use_separate_proj_weight=True,
                 q_proj_weight=self.q_proj_weight, k_proj_weight=self.k_proj_weight,
                 v_proj_weight=self.v_proj_weight, average_attn_weights=average_attn_weights,
-                temporal_shift=self.temporal_shift)
+                temporal_shift=self.temporal_shift, T=self.T)
         else:
             attn_output, attn_output_weights = F.multi_head_attention_forward(
                 query, key, value, self.embed_dim, self.num_heads,
@@ -1044,7 +1045,7 @@ class MultiheadAttention(Module):
                 training=self.training,
                 key_padding_mask=key_padding_mask, need_weights=need_weights,
                 attn_mask=attn_mask, average_attn_weights=average_attn_weights,
-                temporal_shift=self.temporal_shift)
+                temporal_shift=self.temporal_shift, T=self.T)
         if self.batch_first and is_batched:
             return attn_output.transpose(1, 0), attn_output_weights
         else:

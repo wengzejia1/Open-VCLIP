@@ -502,7 +502,7 @@ def _scaled_dot_product_attention(
     k: Tensor,
     v: Tensor,
     attn_mask: Optional[Tensor] = None,
-    dropout_p: float = 0.0, temporal_shift = False, num_heads = None,
+    dropout_p: float = 0.0, temporal_shift = False, num_heads = None, T = 8,
 ) -> Tuple[Tensor, Tensor]:
     r"""
     Computes scaled dot product attention on query, key and value tensors, using
@@ -536,7 +536,7 @@ def _scaled_dot_product_attention(
     # hard coding: framenum->8; num_heads->12; Nt->sequence_length, E->embedding_size(which already //num_heads)
     if temporal_shift == 'channel_shift':
         # hard coding
-        n_segment = 8
+        n_segment = T
         n_div = 4
         if num_heads == None:
             print("should know num_heads")
@@ -575,9 +575,9 @@ def _scaled_dot_product_attention(
     
     elif temporal_shift == 'expand_temporal_view':
         # hard coding
-        n_segment = 8
+        n_segment = T
         n_div = 8
-
+        
         if num_heads == None:
             print("num_heads unknown")
             exit()
@@ -623,7 +623,7 @@ def _scaled_dot_product_attention(
     
     elif temporal_shift == 'expand_temporal_view_step2':
         # hard coding
-        n_segment = 8
+        n_segment = T
         n_div = 8
         if num_heads == None:
             print("num_heads unknown")
@@ -674,7 +674,7 @@ def _scaled_dot_product_attention(
      
     elif temporal_shift == 'expand_temporal_view_step3':
         # hard coding
-        n_segment = 8
+        n_segment = T
         n_div = 8
         if num_heads == None:
             print("num_heads unknown")
@@ -812,6 +812,7 @@ def multi_head_attention_forward(
     static_v: Optional[Tensor] = None,
     average_attn_weights: bool = True,
     temporal_shift: bool = False,
+    T: int = 8
 ) -> Tuple[Tensor, Optional[Tensor]]:
     r"""
     Args:
@@ -1054,7 +1055,7 @@ def multi_head_attention_forward(
     #
     # (deep breath) calculate attention and out projection
     #
-    attn_output, attn_output_weights = _scaled_dot_product_attention(q, k, v, attn_mask, dropout_p, temporal_shift=temporal_shift, num_heads = num_heads)
+    attn_output, attn_output_weights = _scaled_dot_product_attention(q, k, v, attn_mask, dropout_p, temporal_shift=temporal_shift, num_heads = num_heads, T=T)
     attn_output = attn_output.transpose(0, 1).contiguous().view(tgt_len, bsz, embed_dim)
     attn_output = linear(attn_output, out_proj_weight, out_proj_bias)
 

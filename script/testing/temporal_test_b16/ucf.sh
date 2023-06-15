@@ -29,4 +29,3 @@ python -W ignore -u tools/run_net.py \
     TEST.CLIP_ORI_PATH /root/.cache/clip/ViT-B-16.pt \
 
 
-
