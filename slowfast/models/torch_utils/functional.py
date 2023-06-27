@@ -905,6 +905,7 @@ def multi_head_attention_forward(
             static_k=static_k,
             static_v=static_v,
             temporal_shift=temporal_shift,
+            T=T,
         )
 
     is_batched = _mha_shape_check(query, key, value, key_padding_mask, attn_mask, num_heads)

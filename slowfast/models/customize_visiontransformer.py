@@ -16,7 +16,7 @@ class TimesAttentionBlock(nn.Module):
         self.T = T
         
         # type: channel_shift or expand_temporal_view
-        self.attn = activation.MultiheadAttention(d_model, n_head, temporal_shift=temporal_modeling_type)
+        self.attn = activation.MultiheadAttention(d_model, n_head, temporal_shift=temporal_modeling_type, T=T)
         self.ln_1 = LayerNorm(d_model)
 
         self.mlp = nn.Sequential(OrderedDict([
