@@ -1,14 +1,16 @@
 # Open-VCLIP: Transforming CLIP to an Open-vocabulary Video Model via Interpolated Weight Optimization
 
-**This repository contains the official Pytorch implementation of our paper: "Open-VCLIP: Transforming CLIP to an Open-vocabulary Video Model via Interpolated Weight Optimization (ICML 2023, Poster)"**
+**This repository contains the official Pytorch implementation of our papers:**
+- **"Open-VCLIP: Transforming CLIP to an Open-vocabulary Video Model via Interpolated Weight Optimization (ICML 2023, Poster)"** [[`Paper1`]](https://arxiv.org/abs/2302.00624)
+  Zejia Weng, Xitong Yang, Ang Li,  Zuxuan Wu, Yu-Gang Jiang
+- **"Building an Open-Vocabulary Video CLIP Model With Better Architectures, Optimization and Data (TPAMI 2024)"** [[`Paper2`]](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10412661)
+  Zuxuan Wu, Zejia Weng, Wujian Peng, Xitong Yang, Ang Li, Yu-Gang Jiang  
 
-Zejia Weng, Xitong Yang, Ang Li,  Zuxuan Wu, Yu-Gang Jiang
-
- [[`Paper`]](https://arxiv.org/abs/2302.00624)
 
 # Introduction
 
-We introduce a simple yet effective approach, **Open-VCLIP**, which transforms CLIP into strong zero-shot video classifiers and can better recognize unseen actions and events at test time. 
+We introduce a simple yet effective approach, **Open-VCLIP**, which transforms CLIP into strong zero-shot video classifiers and can better recognize unseen actions and events at test time.
+The extended version **Open-VCLIP++** is comming soon. The self-generated captions for Kinetics-400 have been uploaded in folder **"/blip\_llama2\_caption"**.
 
 <div align=center>
   <img src='figures/firstpage.png'>
@@ -151,5 +153,12 @@ This repository is built upon [`PySlowFast`](https://github.com/facebookresearch
   author={Weng, Zejia and Yang, Xitong and Li, Ang and Wu, Zuxuan and Jiang, Yu-Gang},
   booktitle={ICML},
   year={2023}
+}
+
+@article{wu2024building,
+  title={Building an Open-Vocabulary Video CLIP Model With Better Architectures, Optimization and Data},
+  author={Wu, Zuxuan and Weng, Zejia and Peng, Wujian and Yang, Xitong and Li, Ang and Davis, Larry S and Jiang, Yu-Gang},
+  journal={TPAMI},
+  year={2024},
 }
 ```
