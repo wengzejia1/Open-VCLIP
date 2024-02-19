@@ -2,8 +2,10 @@
 
 **This repository contains the official Pytorch implementation of our papers:**
 - **"Open-VCLIP: Transforming CLIP to an Open-vocabulary Video Model via Interpolated Weight Optimization (ICML 2023, Poster)"** [[`Paper1`]](https://arxiv.org/abs/2302.00624)
+
   Zejia Weng, Xitong Yang, Ang Li,  Zuxuan Wu, Yu-Gang Jiang
 - **"Building an Open-Vocabulary Video CLIP Model With Better Architectures, Optimization and Data (TPAMI 2024)"** [[`Paper2`]](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10412661)
+
   Zuxuan Wu, Zejia Weng, Wujian Peng, Xitong Yang, Ang Li, Yu-Gang Jiang  
 
 
